@@ -1,0 +1,8 @@
+build/
+compile_commands.json
+.history/
+.DS_Store
+.vscode/
+!.vscode/vex_project_settings.json
+data/picture
+data/text
