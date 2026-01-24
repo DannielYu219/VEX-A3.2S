@@ -162,7 +162,7 @@ void auton_right() {
   spinChange(100);
   spinIntaker1(100);
   spinIntaker2(100);
-  this_thread::sleep_for(1000);
+  this_thread::sleep_for(1200);
 
   posForwardAbs(40, 120);
   pidRotateAbs(-225);
