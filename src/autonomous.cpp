@@ -39,60 +39,59 @@ void auton_left() {
   auton_init();
   this_thread::sleep_for(50);
   //标定//#
-  posForwardAbs(30, convert(30, 600));
-  this_thread::sleep_for(500);
-  //标定//#
-  // spinIntaker1(100);      // 进球滚轮开始转动
-  // //spinIntaker2(100);      // 导入桶滚轮开始转动
-  // posForwardAbs(40, 115); // 快速接近3q球
-
-  // pidRotateAbs(-45); // 转动车头指向45度方向
-
-  // posForwardAbs(28, 235);      // 慢速吸3球
-  // this_thread::sleep_for(200);
-  // spinIntaker1(60); // 等待0.2s,吸球
-  // setPistonFront(true);        // 前方活塞伸出，抱球
-  // spinIntaker2(150);           // 导入桶滚轮开始转动
-  // this_thread::sleep_for(150); // 等待0.2s,吸球
-  // // spinIntaker1(0);//进球滚轮停止转动
-
-  // pidRotateAbs(-135); // 对准导入桶
-  // posForwardAbs(40, -320); // 后退到中桥         这个距离就是x到中桥的距离
-  // timerForward(-10, 200); // 后退压到桥
-
-  // spinChange(-100);
-  // spinIntaker2(100);
-  // setPistonUp(true);
-  // this_thread::sleep_for(200);
-  // pidRotateAbs(-135);//对准导入桶
-  // posForwardAbs(40, 200); // 后退到导入桶
+  // posForwardAbs(30, convert(30, 600));
   // this_thread::sleep_for(500);
-///////////////////////////////////////////////////////////
+  //标定//#
+  spinIntaker1(100);      // 进球滚轮开始转动
+  //spinIntaker2(100);      // 导入桶滚轮开始转动
+  posForwardAbs(35, 115); // 快速接近3q球
+
+  pidRotateAbs(-45); // 转动车头指向50度方向
+
+  posForwardAbs(35, 175);      // 慢速吸3球
+  this_thread::sleep_for(175);
+  spinIntaker1(100); // 等待0.2s,吸球
+  setPistonFront(true);        // 前方活塞伸出，抱球
+           // 导入桶滚轮开始转动
+  this_thread::sleep_for(150); // 等待0.2s,吸球
+ 
+  pidRotateAbs(-135); // 对准x 
+ 
+  posForwardAbs(40, -320); // 后退到中桥         这个距离就是x到中桥的距离
+  spinIntaker2(60);  
+  timerForward(-10, 200); // 后退压到桥
+
+  spinIntaker2(100);
+  spinChange(-100);
+  this_thread::sleep_for(700);
+
+  spinIntaker2(-100);//反转回收球
+  spinChange(100);//收集、
+  pidRotateAbs(-135);//对准导入桶
+  posForwardAbs(100, 605); // 后退到导入桶
+  spinIntaker2(100);
+  pidRotateAbs(-180);//对准导入桶
+  posForwardAbs(40, 230); // 后退到导入桶
+  timerForward(40, 1000); // 压到倒入桶
   
-  // spinChange(0);
-  // spinIntaker2(0);
+  spinIntaker2(-100);
+  pidRotateAbs(-180);//对准导入桶
+  posForwardAbs(45, -380); // 后退到高桥
+  timerForward(-30, 200);
+  setPistonUp(true);
+  spinIntaker1(100);
+  spinIntaker2(100);
+  spinChange(100);
+  this_thread::sleep_for(1100);
 
-  // spinIntaker1(100);//进球滚轮开始转动
-  // pidRotateAbs(-130);//对准导入桶
+  posForwardAbs(40, 120);
+  pidRotateAbs(-225);
+  posForwardAbs(50, -120);
+  pidRotateAbs(-180);
+  posForwardAbs(50, -100);
+  posForwardAbs(100, -90);
 
-  // posForwardAbs(40, 870);//前进到导入桶          这个距离就是x到导入桶的距离
-  // pidRotateAbs(-180);//对准导入桶
-
-  // posForwardAbs(40, -300);//后退到高桥
-  // timerForward(-30,400);
-  // spinIntaker1(100);
-  // spinIntaker2(100);
-  // setPistonUp(true);
-  // spinChange(100);
-  // this_thread::sleep_for(1500);
-
-  // //抢4
-  // posForwardAbs(30, 150);
-  // pidRotateAbs(-225);
-  // posForwardAbs(30, -175);
-  // pidRotateAbs(-180);
-  // posForwardAbs(30, -200);
-  // posForwardAbs(100, -100);
+  this_thread::sleep_for(500);
 
   auton_pre_usercontrol();
   return;
@@ -101,41 +100,79 @@ void auton_left() {
 void auton_right() {
   auton_init();
   this_thread::sleep_for(50);
-
+  //标定//#
+  // posForwardAbs(30, convert(30, 600));
+  // this_thread::sleep_for(500);
+  //标定//#
+  spinChange(100);
   spinIntaker1(100);      // 进球滚轮开始转动
-  posForwardAbs(40, 100); // 快速接近3q球
+  //spinIntaker2(100);      // 导入桶滚轮开始转动
+  posForwardAbs(38, 110); // 快速接近3q球
 
-  pidRotateAbs(45); // 转动车头指向45度方向
+  pidRotateAbs(45); // 转动车头指向50度方向
 
-  posForwardAbs(30, 260);      // 慢速吸3球
-  this_thread::sleep_for(200); // 等待0.2s,吸球
+  posForwardAbs(30, 200);      // 慢速吸3球
   setPistonFront(true);        // 前方活塞伸出，抱球
+  this_thread::sleep_for(170);
+  spinIntaker1(100); // 等待0.2s,吸球
+  //setPistonFront(true);        // 前方活塞伸出，抱球
+           // 导入桶滚轮开始转动
   this_thread::sleep_for(150); // 等待0.2s,吸球
+           // 导入桶滚轮开始转动
+ 
+  pidRotateAbs(-45); // 对准x 
+  this_thread::sleep_for(100);
 
-  pidRotateAbs(130); // 对准导入桶
+  setPistonFront(false);
+  setPistonDown(true); // 下方活塞拉起，出球
 
-  // softStartTimerForward(0, 40, 150 );//软起动0-40，
-  posForwardAbs(40, 490); // 前进到导入桶          这个距离就是x到导入桶的距离
-  pidRotateAbs(180); // 对准导入桶
-  // posForwardAbs(40, 60);
-  // timerForward(40,1400);
+  posForwardAbs(50, 280); // 前进到中桥//          这个距离就是x到中桥的距离
+  //
 
-  // posForwardAbs(40, -300);//后退到高桥
-  posForwardAbs(40, -300); // 后退到高桥
-  timerForward(-30, 400);
+  timerForward(25, 220); // 前进压到桥
+
+  //spinIntaker2(0);
+  
+  spinIntaker1(-100);
+ 
+
+  //spinIntaker2(-100);
+  //spinChange(0);
+  //setPistonFront(true); // 下方活塞压下
+  this_thread::sleep_for(1000);
+
+  setPistonDown(false);
   spinIntaker1(100);
   spinIntaker2(100);
-  spinChange(100);
-  this_thread::sleep_for(1500);
+  spinChange(100);//收集、
 
-  // 抢4
-  posForwardAbs(30, 150);
+  pidRotateAbs(-45);//对准导入桶
+  posForwardAbs(100, -460); // 后退到导入桶
+  
+  pidRotateAbs(-180);//对准导入桶
+  setPistonFront(true);
+  posForwardAbs(30, 90); // 后退到导入桶
+  timerForward(40, 1000); // 压到倒入桶
+  
+  
+  pidRotateAbs(-180);//对准导高桥
+  posForwardAbs(50, -480); 
+  timerForward(-10, 200);
+  setPistonUp(true);
+  spinChange(100);
+  spinIntaker1(100);
+  spinIntaker2(100);
+  this_thread::sleep_for(1000);
+
+  posForwardAbs(40, 120);
   pidRotateAbs(-225);
-  posForwardAbs(30, -190);
+  posForwardAbs(40, -120);
   pidRotateAbs(-180);
-  posForwardAbs(30, -200);
+  posForwardAbs(50, -100);
   posForwardAbs(100, -90);
-  /**/
+
+  this_thread::sleep_for(500);
+
   auton_pre_usercontrol();
   return;
 }
