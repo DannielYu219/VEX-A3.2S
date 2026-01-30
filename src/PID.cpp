@@ -1,3 +1,11 @@
+/**
+ * @file PID.cpp
+ * @brief Implementation of PID controller class
+ * 
+ * This file implements a PID (Proportional-Integral-Derivative) controller
+ * with anti-windup and target arrival detection features.
+ */
+
 #include "PID.h"
 
 #include "math-tools.h"
@@ -24,33 +32,33 @@ bool PID::targetArrived() { return arrived; }
 float PID::getOutput() { return output; }
 
 void PID::update(float input) {
-  errorCrt = target - input;  // calculate current error
+  errorCrt = target - input;
   P = kp * errorCrt;
-  if (firstTime) {  // first time to update
+  if (firstTime) {
     firstTime = false;
     errorPrev = errorCrt;
     errorInt = 0;
   }
-  errorDev = errorCrt - errorPrev;  // calculate the derivative of error
-  errorPrev = errorCrt;             // record error
-  D = kd * errorDev;                // calculate D
-  if (fabs(P) >= IRange) {          // I = 0 for P > IRange
-    errorInt = 0;
-  } else {  // P <= IRange -> Integrate
+  errorDev = errorCrt - errorPrev;
+  errorPrev = errorCrt;
+  D = kd * errorDev;
+  if (fabs(P) >= IRange) {
+    errorInt *= 0.95;
+  } else {
     errorInt += errorCrt;
-    if (fabs(errorInt) * ki > IMax)  // Limit I to IMax
+    if (fabs(errorInt) * ki > IMax)
       errorInt = sign(errorInt) * IMax / ki;
   }
-  if (sign(errorInt) != sign(errorCrt) ||
-      (fabs(errorCrt) <= errorTol))  // Clear I for small enough error
+  if (sign(errorInt) != sign(errorCrt) && fabs(errorInt) > fabs(errorCrt))
     errorInt = 0;
-  I = ki * errorInt;  // Calculate I
+  I = ki * errorInt;
   if (fabs(errorCrt) <= errorTol &&
-      fabs(D) <= DTol) {  // Exit when staying in tolerated region and
-                          // maintaining a low enough speed for enough time
+      fabs(D) <= DTol) {
     if (myTimer.getTime() >= jumpTime) arrived = true;
   } else {
     myTimer.reset();
   }
   output = P + I + D;
+  if (output > 100) output = 100;
+  if (output < -100) output = -100;
 }

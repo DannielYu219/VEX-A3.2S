@@ -1,3 +1,13 @@
+ /**
+  * @file PID.h
+  * @brief Header file for PID controller class
+  * 
+  * Dependencies: MyTimer
+  * Input: target value, current input value
+  * Output: control output (limited to -100 to 100)
+  * Implementation: Standard PID with anti-windup and target arrival detection
+  */
+
 #ifndef PID_H_
 #define PID_H_
 
